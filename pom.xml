@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sks.learn</groupId>
+	<artifactId>wsdl-to-stub</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Demo for WSDL to Stub generation</name>
+	<description>Demo for WSDL to Stub generation</description>
+	<properties>
+		<apache.cxf.version>2.7.7</apache.cxf.version>
+		<junit.test.version>4.9</junit.test.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.test.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${apache.cxf.version}</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<bindingFiles>
+								<bindingFile>${basedir}/src/main/resources/binding.xml</bindingFile>
+							</bindingFiles>
+							<sourceRoot>${project.build.directory}/generated-sources</sourceRoot>
+							<wsdlRoot>${basedir}/src/main/resources/wsdl</wsdlRoot>
+							<includes>
+								<include>*.wsdl</include>
+							</includes>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
